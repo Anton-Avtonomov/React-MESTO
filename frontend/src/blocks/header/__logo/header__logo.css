@@ -1,0 +1,28 @@
+.header__logo {
+    box-sizing: border-box;
+    width: 142px;
+    height: 33px;
+}
+
+@media screen and (min-width: 320px) {
+    .header__logo {
+        width: 103.74px;
+        height: 24.4px;
+        margin-left: 27px;
+        /* + */
+        align-self: flex-start;
+    }
+}
+
+@media screen and (min-width: 420px) {
+    .header__logo {
+        width: 142px;
+        height: 33px;
+    }
+}
+
+@media screen and (min-width: 918px) {
+    .header__logo {
+        margin-left: 0;
+    }
+}

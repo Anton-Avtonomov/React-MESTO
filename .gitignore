@@ -1,0 +1,24 @@
+# File name
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Folder
+node_modules
+
+# Type File
+*.log
+.npm
+.env
+.DS_Store
+.idea
+.vscode
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build

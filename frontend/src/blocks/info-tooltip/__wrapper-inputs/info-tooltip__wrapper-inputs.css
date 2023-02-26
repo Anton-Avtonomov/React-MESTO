@@ -1,0 +1,15 @@
+.info-tooltip__wrapper-inputs {
+    margin: 50px auto;
+}
+
+@media screen and (min-width: 320px) {
+	.info-tooltip__wrapper-inputs {
+        margin: 40px auto;
+	}
+}
+
+@media screen and (min-width: 550px) {
+	.info-tooltip__wrapper-inputs {
+			margin: 50px auto;
+	}
+}

@@ -1,0 +1,13 @@
+/* block ELEMENT*/
+@import url(../../blocks/element/element.css);
+@import url(../../blocks/element/__heading/element__heading.css);
+@import url(../../blocks/element/__image/element__image.css);
+@import url(../../blocks/element/__title/element__title.css);
+@import url(../../blocks/element/__like/element__like.css);
+@import url(../../blocks/element/__likes-counter/element__likes-counter.css);
+@import url(../../blocks/element/__button-like/element__button-like.css);
+@import url(../../blocks/element/__button-delete/element__button-delete.css);
+@import url(../../blocks/element/__button-delete/element__button-delete_hidden.css);
+@import url(../../blocks/element/__button-delete/element__button-delete_visible.css);
+@import url(../../blocks/element/__logo-like/element__logo-like.css);
+@import url(../../blocks/element/__logo-like/_active/element__logo-like_active.css);

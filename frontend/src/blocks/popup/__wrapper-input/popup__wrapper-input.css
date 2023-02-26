@@ -1,0 +1,8 @@
+.popup__wrapper-input {
+    margin: 30px 0 0 0;
+    position: relative; 
+}
+
+.popup__wrapper-input:first-of-type {
+    margin: 54px 0 0 0;
+}

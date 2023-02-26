@@ -1,0 +1,10 @@
+.element__button {
+    box-sizing: border-box;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 22px;
+    height: 19px;
+    cursor: pointer;
+}
+

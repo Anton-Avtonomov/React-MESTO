@@ -1,0 +1,29 @@
+.burger-menu {
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+}
+
+.burger-menu__span::before {
+    content: '';
+    width: calc(100%-4px);
+    height: 2px;
+    background-color: white;
+    margin: 5px auto;
+}
+
+.burger-menu__span {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    margin-bottom: 5px auto 0 auto;
+}
+
+.burger-menu__span::after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    margin-bottom: 5px auto 0 auto;
+    ;
+}

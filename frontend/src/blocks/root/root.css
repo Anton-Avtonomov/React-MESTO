@@ -1,0 +1,21 @@
+.root {
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    /* Сглаживание шрифтов*/
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    /* Подгонка размеров шрифтов*/
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    /* Рендеринг строк */
+    text-rendering: optimizeLegibility;
+    font-weight: 400;
+    min-width: 320px;
+    max-width: 1280px;
+    background-color: #000;
+    color: #fff;
+    box-sizing: border-box;
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+}

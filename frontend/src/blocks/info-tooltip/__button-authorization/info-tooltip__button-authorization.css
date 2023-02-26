@@ -1,0 +1,21 @@
+.info-tooltip__button-authorization {
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    border: none;
+    border-radius: 2px;
+    padding: 14px 0;
+    background-color: rgba(255, 255, 255, 0);
+    color: #fff;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.info-tooltip__button-authorization:hover {
+    text-decoration: underline;
+    opacity: 0.6;
+}

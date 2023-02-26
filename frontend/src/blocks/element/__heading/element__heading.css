@@ -1,0 +1,7 @@
+.element__heading {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 25px 15px 31px 21px;
+    display: flex;
+    justify-content: space-between;
+}

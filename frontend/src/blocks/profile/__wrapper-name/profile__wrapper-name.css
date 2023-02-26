@@ -1,0 +1,26 @@
+.profile__wrapper-name {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 0;
+}
+
+@media screen and (min-width: 320px) {
+    .profile__wrapper-name {
+        padding-left: 14px;
+    }
+}
+
+@media screen and (min-width: 620px) {
+    .profile__wrapper-name {
+        padding-left: 0;
+    }
+}

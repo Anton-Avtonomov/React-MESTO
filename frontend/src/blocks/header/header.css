@@ -1,0 +1,35 @@
+    .header {
+        box-sizing: border-box;
+        margin: 0 auto;
+        padding: 40px 0;
+        border-bottom: 1px solid rgba(54, 54, 54, .9);
+        /* new effect */
+        display: flex;
+    }
+    
+    @media screen and (min-width: 320px) {
+        .header {
+            padding: 32px 0;
+            flex-direction: column-reverse;
+        }
+    }
+    
+    @media screen and (min-width: 420px) {
+        .header {
+            padding: 40px 0;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    
+    @media screen and (min-width: 520px) {
+        .header {
+            position: sticky;
+            z-index: 5;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, .7);
+            backdrop-filter: blur(5px);
+        }
+    }
