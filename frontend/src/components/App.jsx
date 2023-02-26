@@ -12,7 +12,6 @@ import InfoTooltipPopup from "./InfoTooltipPopup/InfoTooltipPopup.jsx";
 import ConfirmDeletionPopup from "./ConfirmDeletionPopup/ConfirmDeletionPopup.jsx";
 import Api from "../utils/Api.js";
 import Auth from "../utils/Auth.js";
-//import * as Auth from "../utils/Auth.js";
 import { useState, useEffect, useRef } from "react";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { CurrentUserContext, defaultUser } from "../contexts/CurrentUserContext.js";
@@ -292,6 +291,7 @@ function App() {
 
 	useEffect(() => {
 		checkToken();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	function loginOut() {
