@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit'); // Защита от DDOS attac
 const helmet = require('helmet');// Защита от XSS attack
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const auth = require('./middlewares/auth');
 const { validationRouteSignUp, validationRouteSignIn } = require('./middlewares/joi');
 const usersRoutes = require('./routes/users');
@@ -15,6 +16,7 @@ const centerErrors = require('./middlewares/centerErrors');
 const NotFoundError = require('./errors/NotFoundError');
 
 const app = express(); // Создаем приложение!
+app.use(cors());
 
 const limitter = rateLimit({ // Параметры лимиттера
   windowMs: 15 * 60 * 1000, // 15 minutes
