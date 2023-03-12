@@ -3,9 +3,9 @@
 ***
 
 ### Ссылки на проект: 
- [`IP Address:` 158.160.59.76](http://158.160.59.76:3000)
-___`Frontend:` avtonomov.nomoredomains.nomoredomainsclub.ru___
-___`Backend:` avtonomov.nomoredomainsclub.ru___
+ [`IP Address:` 84.201.134.253](http://84.201.134.253)
+___`Frontend:` mesto-avtonomov.nomoredomains.work___
+___`Backend:` api.mesto-avtonomov.nomoredomains.work___
 ***
 ### Автор проекта - Антон Автономов
 Контакты
