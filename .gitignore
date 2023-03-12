@@ -7,6 +7,8 @@ package-lock.json
 
 # Folder
 node_modules
+# production
+build
 
 # Type File
 *.log
@@ -20,5 +22,3 @@ node_modules
 # testing
 /coverage
 
-# production
-/build
