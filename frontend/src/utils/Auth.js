@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 class Auth {
     constructor() {
         this._baseUrl = 'https://auth.nomoreparties.co';
@@ -45,7 +46,8 @@ class Auth {
     //проверки токена
     validityToken(token) {
         return fetch(`${this._baseUrl}/users/me`, {
-                method: "GET",
+          method: "GET",
+          credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`

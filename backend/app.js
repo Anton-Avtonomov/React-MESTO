@@ -16,7 +16,10 @@ const centerErrors = require('./middlewares/centerErrors');
 const NotFoundError = require('./errors/NotFoundError');
 
 const app = express(); // Создаем приложение!
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://mesto-avtonomov.nomoredomains.work'], // Разрешаем запросы с определенных адресов(фронта)
+  credentials: true // Разрешаем передачу авторизационных кук
+}));
 
 const limitter = rateLimit({ // Параметры лимиттера
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -43,8 +46,10 @@ app.all('*', auth, (req, res, next) => { // Все Неизвестные роу
 async function startServer() {
   try {
     mongoose.set('strictQuery', true);
-    await mongoose.connect('mongodb://localhost:27017/mestodb'); // Подключаемся к серверу БД>!
-    const { PORT = 3000 } = process.env; // Указываем порт для сервера, по умолчанию 3000
+
+    await mongoose.connect('mongodb://localhost:27017/mestodb'); // !Подключаемся к серверу БД>!
+    const { PORT = 3001 } = process.env; // !Указываем порт для сервера, по умолчанию 3000
+
     app.listen(PORT, () => { // Устанавливаем слушатель порта!
       console.log(`Сервер запущен на порту: ${PORT}, в ${new Date()}`); // Проверка сервера
     });

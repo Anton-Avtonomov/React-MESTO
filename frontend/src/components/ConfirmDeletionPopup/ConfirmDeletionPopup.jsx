@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import PopupWithForm from "../PopupWithForm/PopupWithForm.jsx";
 
 function ConfirmDeletionPopup({ card, transitionOnClose, onDeleteCard, transitionIsOpen, isOpen, isLoading }) {
