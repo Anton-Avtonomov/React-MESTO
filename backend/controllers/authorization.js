@@ -20,11 +20,14 @@ exports.login = (req, res, next) => {
             return Promise.reject(new AuthorizationError('Неправильная почта или пароль!'));
           }
           const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' }); // Создаём JWT на 7 дней
-          res.status(200).cookie('jwt', token, {
-            maxAge: 3600000 * 24 * 7, // Задаём срок хранения кука в неделю час * 24 * 7дней
-            httpOnly: true, // Запрещаем доступ к куку из JS
-          })
-            .send({ message: 'Успешная аунтификация, кук с JWT создан и отправлен!', jwt: token }); // если у ответа нет тела, можно использовать метод .end();
+          // Вариант на LS
+          res.status(200).send({ message: 'Успешная аунтификация, кук с JWT создан и отправлен!', jwt: token }); // Отправляем сформированный токен в ответе
+          // Вариант на куках
+          //   res.status(200).cookie('jwt', token, {
+          //     maxAge: 3600000 * 24 * 7, // Задаём срок хранения кука в неделю час * 24 * 7дней
+          //     httpOnly: true, // Запрещаем доступ к куку из JS
+          //   })
+          //     .send({ message: 'Успешная аунтификация, кук с JWT создан и отправлен!', jwt: token }); // если у ответа нет тела, можно использовать метод .end();
         });
     })
     .catch((err) => {
