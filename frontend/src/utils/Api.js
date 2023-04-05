@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 class Api {
   constructor() {
-    this.SERVER_URL = 'http://localhost:3001';
+    this.API_URL = 'https://api.mesto-avtonomov.nomoredomains.work';
   }
 
   // метод Обработи ответа
@@ -15,7 +15,7 @@ class Api {
   // Закгрузка данных о пользователе
   getUserData() {
     const token = localStorage.getItem('tokenUser');
-    return fetch(`${this.SERVER_URL}/users/me`, {
+    return fetch(`${this.API_URL}/users/me`, {
       method: 'GET',
       // credentials: 'include',
       headers: {
@@ -33,7 +33,7 @@ class Api {
   // Загрузка карточек с сервера
   getCardsList() {
     const token = localStorage.getItem('tokenUser');
-    return fetch(`${this.SERVER_URL}/cards`, {
+    return fetch(`${this.API_URL}/cards`, {
       method: 'GET',
       // credentials: 'include',
       headers: {
@@ -59,7 +59,7 @@ class Api {
     about
   }) {
     const token = localStorage.getItem('tokenUser');
-    return fetch(`${this.SERVER_URL}/users/me`, {
+    return fetch(`${this.API_URL}/users/me`, {
       method: 'PATCH',
       // credentials: 'include',
       headers: {
@@ -80,7 +80,7 @@ class Api {
     link
   }) {
     const token = localStorage.getItem('tokenUser');
-    return fetch(`${this.SERVER_URL}/cards`, {
+    return fetch(`${this.API_URL}/cards`, {
       method: 'POST',
       // credentials: 'include',
       headers: {
@@ -98,7 +98,7 @@ class Api {
   // Удаление карточки на сервере
   deleteCard(idCard) {
     const token = localStorage.getItem('tokenUser');
-    return fetch(`${this.SERVER_URL}/cards/${idCard}`, {
+    return fetch(`${this.API_URL}/cards/${idCard}`, {
       method: 'DELETE',
       // credentials: 'include',
       headers: {
@@ -112,7 +112,7 @@ class Api {
   // Вложить данные о лайке на сервер
   addLike(idCard) {
     const token = localStorage.getItem('tokenUser');
-    return fetch(`${this.SERVER_URL}/cards/${idCard}/likes`, {
+    return fetch(`${this.API_URL}/cards/${idCard}/likes`, {
       method: 'PUT',
       // credentials: 'include',
       headers: {
@@ -126,7 +126,7 @@ class Api {
   // Удаление данных о лайке на сервере
   removeLike(idCard) {
     const token = localStorage.getItem('tokenUser');
-    return fetch(`${this.SERVER_URL}/cards/${idCard}/likes`, {
+    return fetch(`${this.API_URL}/cards/${idCard}/likes`, {
       method: 'DELETE',
       // credentials: 'include',
       headers: {
@@ -140,7 +140,7 @@ class Api {
   // Вложить данные о аватаре пользователя
   setUserAvatarServer(linkAvatar) {
     const token = localStorage.getItem('tokenUser');
-    return fetch(`${this.SERVER_URL}/users/me/avatar`, {
+    return fetch(`${this.API_URL}/users/me/avatar`, {
       method: 'PATCH',
       // credentials: 'include',
       headers: {
@@ -157,7 +157,7 @@ class Api {
   // Добавление/удаление лайка
   changeLikeStatus(idCard, isLiked) {
     const token = localStorage.getItem('tokenUser');
-    return fetch(`${this.SERVER_URL}/cards/${idCard}/likes`, {
+    return fetch(`${this.API_URL}/cards/${idCard}/likes`, {
       method: isLiked ? 'DELETE' : 'PUT',
       // credentials: 'include',
       headers: {
