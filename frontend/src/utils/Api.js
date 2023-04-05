@@ -14,10 +14,14 @@ class Api {
 
   // Закгрузка данных о пользователе
   getUserData() {
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this.SERVER_URL}/users/me`, {
       method: 'GET',
-      credentials: "include",
-      headers: this._token
+      // credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      }
     })
       // .then((res) => {
       //     this._getRes(res);
@@ -28,17 +32,25 @@ class Api {
 
   // Загрузка карточек с сервера
   getCardsList() {
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this.SERVER_URL}/cards`, {
       method: 'GET',
-      credentials: "include",
-      headers: this._token
+      // credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'authorization': `Bearer ${token}`
+      }
     })
       .then(this._getRes)
+    // проверкаs
+    //   .then((res) => {
+    //     console.log(`GetCardsList отработал, получил: ${JSON.stringify(res)}`);
+    // })
   }
 
   // Данные отобразятся только после завешения обоих запросов
   getDataServer() {
-    return Promise.all([this.getUserData(), this.getCardsList()])
+    return Promise.all([this.getUserData(), this.getCardsList()]) //Запрос выполнится только при условии выполнении дугих запросов
   }
 
   // Редактирование данных профиля на сервере
@@ -46,10 +58,14 @@ class Api {
     name,
     about
   }) {
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this.SERVER_URL}/users/me`, {
       method: 'PATCH',
-      credentials: "include",
-      headers: this._token,
+      // credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name,
         about
@@ -63,10 +79,14 @@ class Api {
     name,
     link
   }) {
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this.SERVER_URL}/cards`, {
       method: 'POST',
-      credentials: "include",
-      headers: this._token,
+      // credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         name,
         link
@@ -77,40 +97,56 @@ class Api {
 
   // Удаление карточки на сервере
   deleteCard(idCard) {
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this.SERVER_URL}/cards/${idCard}`, {
       method: 'DELETE',
-      credentials: "include",
-      headers: this._token,
+      // credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
     })
       .then(this._getRes)
   }
 
   // Вложить данные о лайке на сервер
   addLike(idCard) {
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this.SERVER_URL}/cards/${idCard}/likes`, {
       method: 'PUT',
-      credentials: "include",
-      headers: this._token,
+      // credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'authorization': `Bearer ${token}`,
+      },
     })
       .then(this._getRes)
   }
 
   // Удаление данных о лайке на сервере
   removeLike(idCard) {
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this.SERVER_URL}/cards/${idCard}/likes`, {
       method: 'DELETE',
-      credentials: "include",
-      headers: this._token,
+      // credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
     })
       .then(this._getRes)
   }
 
   // Вложить данные о аватаре пользователя
   setUserAvatarServer(linkAvatar) {
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this.SERVER_URL}/users/me/avatar`, {
       method: 'PATCH',
-      credentials: "include",
-      headers: this._token,
+      // credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
       body: JSON.stringify({
         avatar: linkAvatar
       })
@@ -119,11 +155,15 @@ class Api {
   }
 
   // Добавление/удаление лайка
-  changeLikeStatus(idCard, checkStatusLike) {
+  changeLikeStatus(idCard, isLiked) {
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this.SERVER_URL}/cards/${idCard}/likes`, {
-      method: checkStatusLike ? 'DELETE' : 'PUT',
-      credentials: "include",
-      headers: this._token,
+      method: isLiked ? 'DELETE' : 'PUT',
+      // credentials: 'include',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
     })
       .then(this._getRes)
   }

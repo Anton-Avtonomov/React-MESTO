@@ -57,25 +57,53 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const cardRef = useRef();
 
   const history = useHistory();
 
+  function checkToken() {
+    const token = localStorage.getItem("tokenUser");
+    if (token) {
+      Auth.validityToken()
+        .then((res) => {
+          if (res) {
+            setIsLoggedIn(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
   useEffect(() => {
-    if (loggedIn) {
+    // console.log(
+    //   "сработал Useeffect проверки состояния авторизации",
+    //   isLoggedIn
+    // );
+    const token = localStorage.getItem("tokenUser");
+    if (!token) {
+      return;
+    }else if (token) {
+      checkToken(); // Проверка токена
+    } else {
+      console.log("Пользователь НЕ авторизован!");
+      return;
+    }
+    if (isLoggedIn) {
       async function fetchUserData() {
         try {
           const userInfo = await Api.getUserData();
+          // console.log(`userInfo: ${JSON.stringify(userInfo)}`); Провера вариант 1
+          // console.log(`userInfo._id: ${userInfo._id}`); Провера вариант 2
           setCurrentUser(userInfo);
-          // console.log(userInfo);
-          // setCurrentUser(await Api._getUserData());
+          setUserEmailOnHeader(userInfo.email);
         } catch {
           console.log("ошибка в запросе данных ТЕКУЩЕГо пользователя");
         }
       }
-      fetchUserData();
 
       async function fetchArrayCards() {
         try {
@@ -85,12 +113,11 @@ function App() {
           console.log("ошибка в запросе массива карточек");
         }
       }
-
-      if (loggedIn) {
-      }
       fetchArrayCards();
+      fetchUserData();
+      history.push("/");
     }
-  }, [loggedIn]);
+  }, [history, isLoggedIn]);
 
   useEffect(() => {
     function closeByEscape(evt) {
@@ -189,12 +216,12 @@ function App() {
 
   function handleCardLike(card) {
     // проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((item) => item === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     Api.changeLikeStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((item) => (item._id === card._id ? newCard : item))
         );
       })
       .catch((err) => {
@@ -207,6 +234,7 @@ function App() {
     Api.pushNewcard(newCard)
       .then((newCard) => {
         // возвращаю массив карточек с вновь добавленной
+        // console.log(newCard);
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
@@ -224,13 +252,13 @@ function App() {
       .then((res) => {
         if (res) {
           //Меняю состояние на авторизованное
-          setLoggedIn(true);
+          setIsLoggedIn(true);
           // Изменяем email в блоке HEADER
           setUserEmailOnHeader(email);
+          // Сохраняем данные юзера
+          localStorage.setItem("tokenUser", res.tokenUser);
           // Переходим на главную страницу
           history.push("/");
-          // Сохраняем токен в LS, полученный от сервера
-          localStorage.setItem("tokenUser", res.jwt);
         }
       })
       .catch(() => {
@@ -269,32 +297,10 @@ function App() {
       });
   }
 
-  function checkToken() {
-    const token = localStorage.getItem("tokenUser");
-    if (token) {
-      Auth.validityToken(token)
-        .then((res) => {
-          if (res) {
-            setUserEmailOnHeader(res.data.email);
-            setLoggedIn(true);
-            history.push("/");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }
-
-  useEffect(() => {
-    checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   function loginOut() {
     localStorage.removeItem("tokenUser");
     history.push("/sign-in");
-    setLoggedIn(false);
+    setIsLoggedIn(false);
     setUserEmailOnHeader("");
   }
 
@@ -312,7 +318,7 @@ function App() {
             cards={cards}
             transitionHandleCardLike={handleCardLike}
             transitionHandleDeleteClick={handleConfirmDeleteClick}
-            loggedIn={loggedIn}
+            loggedIn={isLoggedIn}
             component={Main}
             exact
             path="/"
@@ -327,7 +333,7 @@ function App() {
           </Route>
 
           <Route>
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
+            {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
           </Route>
         </Switch>
         <AddPlacePopup
@@ -373,7 +379,7 @@ function App() {
         />
       </CurrentUserContext.Provider>
 
-      {loggedIn && <Footer />}
+      {isLoggedIn && <Footer />}
     </div>
   );
 }

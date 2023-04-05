@@ -13,7 +13,7 @@ module.exports.getUsers = (req, res, next) => {
 };
 // не смог придумать как переиспользовать метод getusers
 module.exports.getUserInfo = (req, res, next) => {
-  Users.findById(req.user._id)
+  Users.findById(req.user.jwtId)
     .then((user) => {
       res.status(200).send(user);
     })
@@ -42,7 +42,7 @@ module.exports.getUserById = (req, res, next) => {
 module.exports.updateProfile = (req, res, next) => {
   const { name, about } = req.body;
 
-  Users.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
+  Users.findByIdAndUpdate(req.user.jwtId, { name, about }, { new: true, runValidators: true })
     .orFail(() => {
       throw new NotFoundError('Пользователь не найден!');
     })
@@ -56,7 +56,7 @@ module.exports.updateProfile = (req, res, next) => {
 
 module.exports.updateAvatar = (req, res, next) => {
   Users.findByIdAndUpdate(
-    req.user._id,
+    req.user.jwtId,
     { avatar: req.body.avatar },
     { new: true, runValidators: true },
   )

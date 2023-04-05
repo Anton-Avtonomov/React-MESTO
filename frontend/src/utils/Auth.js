@@ -1,10 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
 class Auth {
   constructor() {
-    this._baseUrl = 'http://localhost:3001';
+    this._baseUrl = "http://localhost:3001";
     this._headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      "Accept": "application/json",
+      "Content-Type": "application/json"
     };
   }
 
@@ -24,7 +24,7 @@ class Auth {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email: email, password: password }) // При РЕГИСТРАЦИИ отправляем введеные данные в формате JSON
     })
       .then((res) => {
         return this._getRes(res);
@@ -36,21 +36,22 @@ class Auth {
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }) // При АВТОРИЗАЦИИ отправляем введеные данные в формате JSON
     })
       .then((res) => {
         return this._getRes(res);
       })
   }
 
-  //проверки токена
-  validityToken(token) {
+  // метод проверки токена на валидность
+  validityToken() {
+    const token = localStorage.getItem("tokenUser");
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      credentials: "include",
+      // credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+        "authorization": `Bearer ${token}`, // Добавляем к токену Bearer
       }
     })
       .then((res) => {

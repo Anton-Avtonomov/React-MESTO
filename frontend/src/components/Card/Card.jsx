@@ -7,20 +7,21 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext.js"
 function Card({card, onCardClick, onCardLike, onCardDelete}) {
 	const currentUser = useContext(CurrentUserContext);
 	// button Delete
-	const isOwn = card.owner._id === currentUser._id;
 
+  const isOwn = card.owner === currentUser._id; // Сравниваем id карточки с ID текущего пользоватя
 	const cardDeleteButtonClassName = (`element__button-delete ${isOwn ? "element__button-delete_visible" : "element__button-delete_hidden"}`);
 	// button Like
-	const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+	const isLiked = card.likes.some(i => i === currentUser._id);
 	const cardLikeButtonClassName = (`"element__logo-like" ${isLiked && "element__logo-like_active"}`);
-	
+
 	// Click by card
 	function handleClick() {
 		onCardClick(card);
 	}
 // Click by button likes card
 	function handleLikeClick() {
-		onCardLike(card);
+    onCardLike(card);
 	}
 
 	function handleDeleteCard() {
