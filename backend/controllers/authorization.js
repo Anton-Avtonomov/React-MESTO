@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-const JWT_SECRET = process.env.JWT_SECRET;
+const {NODE_ENV, JWT_SECRET} = process.env;
 const bcrypt = require('bcrypt'); // импортируем модуль хеширования
 const jwt = require('jsonwebtoken'); // импортируем модуль jsonwebtoken
 const Users = require('../models/user');// импортируем модуль схемы юзера
@@ -22,7 +22,7 @@ exports.login = (req, res, next) => {
             return Promise.reject(new AuthorizationError('Неправильная почта или пароль!'));
           }
           // Если пароли СОВПАЛИ
-          const token = jwt.sign({ jwtId: user._id }, JWT_SECRET, { expiresIn: '7d' }); // Создаём JWT на 7 дней
+          const token = jwt.sign({ jwtId: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' }); // Создаём JWT на 7 дней
           // Вариант на LS
           res.status(200).send({ message: 'Успешная аунтификация, JWT создан и отправлен!', tokenUser: token }); // Отправляем сформированный токен в ответе
           // Вариант на куках
@@ -34,7 +34,7 @@ exports.login = (req, res, next) => {
         });
     })
     .catch((err) => {
-      console.log('проверка 2')
+      console.log('')
       next(err);
     });
 };

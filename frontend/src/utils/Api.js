@@ -42,7 +42,7 @@ class Api {
       }
     })
       .then(this._getRes)
-    // проверкаs
+    // проверка
     //   .then((res) => {
     //     console.log(`GetCardsList отработал, получил: ${JSON.stringify(res)}`);
     // })
