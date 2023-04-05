@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 class Auth {
   constructor() {
-    this._baseUrl = "http://localhost:3001";
+    this._baseUrl = "https://api.mesto-avtonomov.nomoredomains.work";
     this._headers = {
       "Accept": "application/json",
       "Content-Type": "application/json"
