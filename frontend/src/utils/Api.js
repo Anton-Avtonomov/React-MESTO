@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 class Api {
   constructor() {
-    this.API_URL = 'https://api.mesto-avtonomov.nomoredomains.work';
+    this.API_URL = 'http://localhost:3001';
   }
 
   // метод Обработи ответа

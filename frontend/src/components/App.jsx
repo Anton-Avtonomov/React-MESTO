@@ -85,8 +85,8 @@ function App() {
     // );
     const token = localStorage.getItem("tokenUser");
     if (!token) {
-      return;
-    }else if (token) {
+      return
+    } else if (token) {
       checkToken(); // Проверка токена
     } else {
       console.log("Пользователь НЕ авторизован!");
