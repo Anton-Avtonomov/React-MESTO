@@ -1,10 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
 class Auth {
   constructor() {
-    this._baseUrl = "http://localhost:3001";
+    this._baseUrl = 'https://api.mesto-avtonomov.nomoredomains.work';
     this._headers = {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
     };
   }
 
@@ -22,7 +22,7 @@ class Auth {
   // метод регистрации
   register(email, password) {
     return fetch(`${this._baseUrl}/signup`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ email: email, password: password }) // При РЕГИСТРАЦИИ отправляем введеные данные в формате JSON
     })
@@ -34,7 +34,7 @@ class Auth {
   // метод авторизации
   authorization(email, password) {
     return fetch(`${this._baseUrl}/signin`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({ email, password }) // При АВТОРИЗАЦИИ отправляем введеные данные в формате JSON
     })
@@ -45,13 +45,13 @@ class Auth {
 
   // метод проверки токена на валидность
   validityToken() {
-    const token = localStorage.getItem("tokenUser");
+    const token = localStorage.getItem('tokenUser');
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
-      // credentials: "include",
+      method: 'GET',
+      // credentials: 'include',
       headers: {
-        "Content-Type": "application/json",
-        "authorization": `Bearer ${token}`, // Добавляем к токену Bearer
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${token}`, // Добавляем к токену Bearer
       }
     })
       .then((res) => {
