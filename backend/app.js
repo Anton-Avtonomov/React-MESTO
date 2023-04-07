@@ -19,10 +19,19 @@ const centerErrors = require('./middlewares/centerErrors'); // Мидлвер о
 const NotFoundError = require('./errors/NotFoundError');
 
 const app = express(); // Создаем приложение!
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://mesto-avtonomov.nomoredomains.work'], // Разрешаем запросы с определенных адресов(фронта)
-  // credentials: true, // Разрешаем передачу авторизационных кук
-}));
+const options = {
+  origin: [
+    'http://localhost:3000',
+    'https://mesto-avtonomov.nomoredomains.work',
+  ],
+  method: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+  // credentials: true,
+};
+
+app.use('*', cors(options));
 
 const limitter = rateLimit({ // Параметры лимиттера
   windowMs: 15 * 60 * 1000, // 15 minutes

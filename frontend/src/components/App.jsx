@@ -63,10 +63,9 @@ function App() {
 
   const history = useHistory();
 
-  function checkToken() {
-    const token = localStorage.getItem("tokenUser");
+  function checkToken(token) {
     if (token) {
-      Auth.validityToken()
+      return Auth.validityToken()
         .then((res) => {
           if (res) {
             setIsLoggedIn(true);
@@ -84,13 +83,8 @@ function App() {
     //   isLoggedIn
     // );
     const token = localStorage.getItem("tokenUser");
-    if (!token) {
-      return;
-    } else if (token) {
+    if (token) {
       checkToken(); // Проверка токена
-    } else {
-      console.log("Пользователь НЕ авторизован!");
-      return;
     }
     if (isLoggedIn) {
       async function fetchUserData() {

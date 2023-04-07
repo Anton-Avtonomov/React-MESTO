@@ -1,4 +1,4 @@
-const { JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 const jwt = require('jsonwebtoken');
 const AuthorizationError = require('../errors/AuthorizationError');
 
@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
   const token = authorization.replace('Bearer ', ''); // извлечём токен без 'приставки' Bearer
   let payload;
   try {
-    payload = jwt.verify(token, JWT_SECRET); // Проверяет и возвращает payload JWT
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key'); // Проверяет и возвращает payload JWT
     // console.log('токен валиден');
   } catch (err) {
     // console.log('токен НЕ валиден!!!')

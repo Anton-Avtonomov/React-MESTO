@@ -3,7 +3,7 @@
 ***
 
 ### Ссылки на проект: 
- [`IP Address:` 84.201.134.253](http://84.201.134.253)
+ [`IP:` 84.201.134.253](http://84.201.134.253)
 `Frontend:` https://mesto-avtonomov.nomoredomains.work
 Для запуска используйте команду ___npm run start___
 `Backend:` https://api.mesto-avtonomov.nomoredomains.work
